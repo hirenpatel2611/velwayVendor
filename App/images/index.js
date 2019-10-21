@@ -1,0 +1,25 @@
+// Logos
+export const MECHANIC=require('../images/mechanic.png');
+export const HAND_HOLDING_UP=require('../images/hand-holding-up-a-wrench.png');
+export const CAR_ENGINE=require('../images/car-engine.png');
+export const TIMING_BELT=require('../images/timing-belt.png');
+export const BITMAP=require('../images/Bitmap.png');
+export const BITMAP1=require('../images/Bitmap1.png');
+export const BITMAP2=require('../images/Bitmap2.png');
+export const CAR=require('../images/car.png');
+export const MOTORCYCLE=require('../images/bike.png');
+export const LOCATION=require('../images/location.png');
+export const ICON_REFRESH=require("../images/resendOTP.png");
+export const BACK_ARROW=require("../images/BackArrow.png");
+export const USER2=require("../images/mechanic_2.png");
+export const FILTER=require("../images/filter_list.png");
+export const MENU=require("../images/menu.png");
+export const CALL=require("../images/phone.png");
+export const BIKE_FOR_MAP=require("../images/bikeForMap.jpg");
+export const PENCIL=require("../images/edit.png");
+export const MECHANIC_MAP_ICON=require("../images/mechanic_2.png");
+export const SUCCESS=require('../images/success.png');
+export const HEAVY_VEHICLE=require('../images/heavyVehicle.png');
+export const TOWING=require('../images/towing.png');
+export const TYRE=require('../images/tyre.png');
+export const POWERBUTTON=require('../images/PowerButton.png');
