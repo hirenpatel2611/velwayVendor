@@ -21,5 +21,4 @@ export const MECHANIC_MAP_ICON=require("../images/mechanic_2.png");
 export const SUCCESS=require('../images/success.png');
 export const HEAVY_VEHICLE=require('../images/heavyVehicle.png');
 export const TOWING=require('../images/towing.png');
-export const TYRE=require('../images/tyre.png');
 export const POWERBUTTON=require('../images/PowerButton.png');

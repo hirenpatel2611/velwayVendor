@@ -3,11 +3,6 @@ import Peer from "peerjs";
 import io from "socket.io-client";
 import { Notifications, Util } from "expo";
 import { getBookingModal, getBookingVendorStatus, goToMap } from "./Vendors";
-import {
-  getBookingStatus,
-  getMechanicCurrentLocation,
-  getVendorRatingModal
-} from "./Cutomers";
 import { Actions } from "react-native-router-flux";
 import * as Location from "expo-location";
 import * as Constants from "expo-constants";
@@ -50,35 +45,22 @@ export const createSocketChannel = val => async (dispatch, getState) => {
         break;
 
       case "ACCEPT":
-        if (isUserVendor === "1") {
           dispatch(getBookingVendorStatus(data));
-        }
-
         break;
 
       case "ON-THE-WAY":
-        if (isUserVendor === "1") {
           dispatch(getBookingVendorStatus(data));
-        }
-
         break;
 
       case "CANCEL":
-        if (isUserVendor === "1") {
           dispatch(getBookingVendorStatus(data));
-        }
         break;
 
       case "REACHED":
-        if (isUserVendor === "1") {
           dispatch(getBookingVendorStatus(data));
-        }
         break;
       case "COMPLETED":
-        if (isUserVendor === "1") {
           dispatch(getBookingVendorStatus(data));
-        }
-
         break;
 
       default:
@@ -102,35 +84,23 @@ TaskManager.defineTask(LOCATION_TASK_NAME, async ({ data, error }) => {
         break;
 
       case "ACCEPT":
-        if (isVen === "1") {
           disp(getBookingVendorStatus(data));
-        }
-
         break;
 
       case "ON-THE-WAY":
-        if (isVen === "1") {
           disp(getBookingVendorStatus(data));
-        }
-
         break;
 
       case "CANCEL":
-        if (isVen === "1") {
           disp(getBookingVendorStatus(data));
-        }
         break;
 
       case "REACHED":
-        if (isVen !== "1") {
           disp(getBookingVendorStatus(data));
-        }
         break;
 
       case "COMPLETED":
-        if (isVen === "1") {
           disp(getBookingVendorStatus(data));
-        }
         break;
 
       default:
@@ -158,16 +128,13 @@ export const connectTosocketBookingCancle = val => async (
 ) => {
   const { bookingData, bookingStatus, cancelBookingData } = getState().vendors;
   const { userId, isUserVendor } = getState().user;
-  const { bookData, vendorsData } = getState().customers;
   var cancelData;
   var toToken;
   if (isUserVendor === "1") {
     cancelData = bookingData;
     Notifications.dismissAllNotificationsAsync();
     Notifications.cancelAllScheduledNotificationsAsync();
-  } else {
-    cancelData = bookData;
-  }
+  } 
 
   chatSocket.emit("booking_status", {
     room: `${val.customer_id}`,

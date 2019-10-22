@@ -36,7 +36,6 @@ import {
   getFutureBookings,
   createCustomerSocketChannel
 } from "./actions";
-import SideMenu from "./components/drawer/SideMenu";
 import SideMenuVendor from "./components/drawer/SideMenuVendor";
 import { Asset, SplashScreen,Notifications } from "expo";
 import {getBookingVendorStatus,getBookingModal,getBookingStatus} from './actions'

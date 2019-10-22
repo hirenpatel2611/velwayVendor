@@ -81,7 +81,6 @@ class RegisterOTP extends Component {
       isHeavyVehicle,
       isTowingService,
       isTyreService,
-      isVendor,
       otpTimeOut,
       otpMinute,
       otp,
@@ -107,24 +106,18 @@ class RegisterOTP extends Component {
                 styles.containertwo,
                 ,
                 {
-                  marginTop: this.props.isVendor
-                    ? 0.08 * ScreenHeight
-                    : 0.2 * ScreenHeight,
-                  height: this.props.isVendor
-                    ? 0.82 * ScreenHeight
-                    : 0.62 * ScreenHeight
+                  marginTop: 0.08 * ScreenHeight,
+                  height: 0.82 * ScreenHeight
                 }
               ]}
             >
               <Text style={modalHTextStyle}>
                 Select your{" "}
-                {isVendor ? <Text>Service</Text> : <Text>Vehicle</Text>} Type
+                Service Type
               </Text>
               <View
                 style={{
-                  height: this.props.isVendor
-                    ? 0.6 * ScreenHeight
-                    : 0.38 * ScreenHeight,
+                  height: 0.6 * ScreenHeight,
                   flexDirection: "column",
                   justifyContent: "space-around"
                 }}
@@ -176,7 +169,6 @@ class RegisterOTP extends Component {
                       />
                     </View>
                   </TouchableOpacity>
-                  {this.props.isVendor ? (
                     <TouchableOpacity
                       onPress={() => this.props.updateTowingServiceBool()}
                     >
@@ -194,10 +186,7 @@ class RegisterOTP extends Component {
                         />
                       </View>
                     </TouchableOpacity>
-                  ) : null}
                 </View>
-
-                {this.props.isVendor ? (
                   <View style={modalButtonViewStyle}>
                     <TouchableOpacity
                       onPress={() => this.props.updateTyreServiceBool()}
@@ -217,7 +206,6 @@ class RegisterOTP extends Component {
                       </View>
                     </TouchableOpacity>
                   </View>
-                ) : null}
               </View>
               <TouchableHighlight
                 disabled={
@@ -237,7 +225,7 @@ class RegisterOTP extends Component {
                 style={[
                   createButton,
                   {
-                    marginTop: this.props.isVendor ? 13 : 3,
+                    marginTop: 13,
                     opacity:
                       isTwoWheeler ||
                       isFourWheeler ||
@@ -349,7 +337,6 @@ const mapStateToProps = ({ register }) => {
     isHeavyVehicle,
     isTowingService,
     isTyreService,
-    isVendor,
     otpTimeOut,
     otpMinute,
     otp,
@@ -363,7 +350,6 @@ const mapStateToProps = ({ register }) => {
     isHeavyVehicle,
     isTowingService,
     isTyreService,
-    isVendor,
     otpTimeOut,
     otpMinute,
     otp,

@@ -169,7 +169,6 @@ class Profile extends Component {
       address,
       email,
       workshop_name,
-      isVendor,
       gstin,
       agreeCheckbox
     } = this.props;
@@ -192,7 +191,7 @@ class Profile extends Component {
         <KeyboardAwareScrollView
           enableOnAndroid
           contentContainerStyle={{
-            paddingBottom: this.props.isVendor ? 180 : null
+            paddingBottom: 180
           }}
         >
           <StatusBar backgroundColor="#FFFFFFFF" />
@@ -200,7 +199,6 @@ class Profile extends Component {
           <View style={headerViewProfile}>
             <Text style={headerTextStyle}>Personal Details</Text>
             <View style={{ height: 0.78 * ScreenHeight, top: 20 }}>
-              {this.props.isVendor ? (
                 <View
                   style={{
                     borderRadius: 15,
@@ -255,14 +253,13 @@ class Profile extends Component {
                     />
                   </TouchableOpacity>
                 </View>
-              ) : null}
+
               <View
                 style={{
                   height: 0.55 * ScreenHeight,
                   justifyContent: "space-around"
                 }}
               >
-                {this.props.isVendor ? (
                   <View style={subContainerProfile}>
                     <TextInput
                       style={[
@@ -277,15 +274,15 @@ class Profile extends Component {
                         this.props.updateWorkshopName(text);
                       }}
                     />
-                    {this.props.isVendor ? (
+                    {
                       errors.workshop_name ? (
                         <Text style={styles.textError2}>
                           {errors.workshop_name[0]}
                         </Text>
                       ) : null
-                    ) : null}
+                    }
                   </View>
-                ) : null}
+
                 <TextInput
                   style={textInputProfilStyle}
                   underlineColorAndroid="transparent"
@@ -300,7 +297,6 @@ class Profile extends Component {
                   <Text style={styles.textError2}>{errors.name[0]}</Text>
                 ) : null}
 
-                {this.props.isVendor ? (
                   <View
                     style={{
                       marginLeft: 16,
@@ -345,24 +341,10 @@ class Profile extends Component {
                       }}
                     />
                   </View>
-                ) : (
-                  <TextInput
-                    style={textInputProfilStyle}
-                    underlineColorAndroid="transparent"
-                    placeholder={"Address (Optional)"}
-                    placeholderTextColor="#9D9D9D"
-                    autoCapitalize="none"
-                    value={this.props.address}
-                    onChangeText={text => {
-                      this.props.updateAddress(text);
-                    }}
-                  />
-                )}
-                {this.props.isVendor ? (
-                  errors.address ? (
+                  {errors.address ? (
                     <Text style={styles.textError2}>{errors.address[0]}</Text>
-                  ) : null
-                ) : null}
+                  ) : null}
+
 
                 <TextInput
                   style={textInputProfilStyle}
@@ -376,12 +358,9 @@ class Profile extends Component {
                     this.props.updateEmail(text);
                   }}
                 />
-                {this.props.isVendor ? (
-                  errors.email ? (
+                {errors.email ? (
                     <Text style={styles.textError2}>{errors.email[0]}</Text>
-                  ) : null
-                ) : null}
-                {this.props.isVendor ? (
+                  ) : null}
                   <TextInput
                     style={textInputProfilStyle}
                     underlineColorAndroid="transparent"
@@ -394,9 +373,8 @@ class Profile extends Component {
                       this.props.updateGstin(text);
                     }}
                   />
-                ) : null}
 
-                {this.props.isVendor ? (
+                {
                   this.props.isVerifed !== null ? (
                     <Text
                       style={[
@@ -406,8 +384,7 @@ class Profile extends Component {
                     >
                       {this.props.isVerifed ? "Verifed" : "Not Verifed"}
                     </Text>
-                  ) : null
-                ) : null}
+                  ) : null}
 
                 <TextInput
                   style={textInputProfilStyle}
@@ -460,7 +437,6 @@ class Profile extends Component {
                 />
               </View>
 
-              {this.props.isVendor ? (
                 <View>
                   <Text
                     style={{
@@ -526,7 +502,6 @@ class Profile extends Component {
                     </TouchableOpacity>
                   </View>
                 </View>
-              ) : null}
 
               <Text style={styles.textError2}>
                 {this.props.signupFail ? this.props.signupFail : null}
@@ -573,17 +548,13 @@ class Profile extends Component {
                 onPress={() => {
                   this.props.updateOnSubmeetSignup();
                   if (this.props.isValid(this.props.register)) {
-                    if (this.props.isVendor) {
                       this.props.setLocation();
-                    } else {
-                      this.props.signupUser();
-                    }
                   }
                 }}
                 underlayColor="white"
                 style={[
                   createButton,
-                  { marginTop: this.props.isVendor ? -5 : 0.05 * ScreenHeight }
+                  { marginTop: -5}
                 ]}
               >
                 <Text style={[buttonText, whiteText]}>
@@ -701,9 +672,7 @@ class Profile extends Component {
                     fontFamily: "circular-book"
                   }}
                 >
-                  {this.props.isVendor
-                    ? "Wait for an approval from us."
-                    : "Get ready to find your mechanic."}
+                    Wait for an approval from us.
                 </Text>
                 <TouchableHighlight
                   onPress={() => {
@@ -730,11 +699,8 @@ const notEmpty = test => !isEmpty(test);
 const rules = [
   {
     field: "workshop_name",
-    condition: (workshop_name, { isVendor }) => {
-      if (isVendor) {
+    condition: (workshop_name) => {
         return workshop_name === "" ? false : true;
-      }
-      return true;
     },
     error: "Workshop Name is Require"
   },
@@ -745,21 +711,17 @@ const rules = [
   },
   {
     field: "address",
-    condition: (address, { isVendor }) => {
-      if (isVendor) {
+    condition: (address) => {
         return address === "" ? false : true;
-      }
-      return true;
+
     },
     error: "State is Require"
   },
   {
     field: "email",
-    condition: (email, { isVendor }) => {
-      if (isVendor) {
+    condition: (email) => {
         return email === "" ? true : true;
-      }
-      return true;
+
     },
     error: "Email is Require"
   },
@@ -776,24 +738,20 @@ const rules = [
   },
   {
     field: "documentRegisterUri",
-    condition: (documentRegisterUri, { isVendor }) => {
-      if (isVendor) {
+    condition: (documentRegisterUri) => {
         return documentRegisterUri.length >= 1 ? true : false;
-      }
 
-      return true;
     },
     error: "Please Add Document"
   },
   {
     field: "agreeCheckbox",
-    condition: (agreeCheckbox, { isVendor }) => agreeCheckbox === true,
+    condition: (agreeCheckbox) => agreeCheckbox === true,
     error: "Please agree terms and conditions."
   },
   {
     field: "email",
-    condition: (email, { isVendor }) => {
-      if (isVendor) {
+    condition: (email) => {
         const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
         if (email === "") {
           return true;
@@ -804,8 +762,7 @@ const rules = [
             return false;
           }
         }
-      }
-      return true;
+
     },
     error: "Please Enter correct Email"
   }
@@ -829,7 +786,6 @@ const mapStateToProps = ({ register }) => {
     confirmPassword,
     mobilenoProfile,
     onSubmeetSignupForm,
-    isVendor,
     errorMessage,
     locationVendor,
     setLocationVisible,
@@ -854,7 +810,6 @@ const mapStateToProps = ({ register }) => {
     confirmPassword,
     mobilenoProfile,
     onSubmeetSignupForm,
-    isVendor,
     errorMessage,
     locationVendor,
     setLocationVisible,

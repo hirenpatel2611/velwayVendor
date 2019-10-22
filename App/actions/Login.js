@@ -5,7 +5,6 @@ import { Actions } from "react-native-router-flux";
 import { AsyncStorage, Platform } from "react-native";
 import { getUserData, updateLoggedInState } from "./ui";
 import { createSocketChannel } from "./Socket";
-import { createCustomerSocketChannel } from "./CustomerSocket";
 import { Notifications } from "expo";
 
 export const UPDATE_PASSWORD = "login/UPDATE_PASSWORD";
@@ -68,10 +67,7 @@ export const loginUser = () => async (dispatch, getState) => {
         } else {
           dispatch({
             type: LOGIN_FAILED_IS_VENDOR_CHECK,
-            payload:
-              response.data.is_vendor == 1
-                ? "You are not a registered Customer"
-                : "You are not a registered Vendor"
+            payload:"You are not a registered Vendor"
           });
         }
       } else if (response.code === 0) {
